@@ -27,6 +27,7 @@ export class AppComponent implements OnInit{
   request!:ReserveRoomRequest;
   currentCheckInVal!:string;
   currentCheckOutVal!:string;
+  welcomeMsgs!:string[];
 
     ngOnInit(){
       this.roomsearch= new FormGroup({
@@ -34,17 +35,20 @@ export class AppComponent implements OnInit{
         checkout: new FormControl(' ')
       });
 
- //     this.rooms=ROOMS;
+      //     this.rooms=ROOMS;
+      this.getWelcomeMsgs().subscribe(
+        msgs => {this.welcomeMsgs=msgs;}
+      )
 
 
-    const roomsearchValueChanges$ = this.roomsearch.valueChanges;
+      const roomsearchValueChanges$ = this.roomsearch.valueChanges;
 
-    // subscribe to the stream
-    roomsearchValueChanges$.subscribe(x => {
-      this.currentCheckInVal = x.checkin;
-      this.currentCheckOutVal = x.checkout;
-    });
-  }
+      // subscribe to the stream
+      roomsearchValueChanges$.subscribe(x => {
+        this.currentCheckInVal = x.checkin;
+        this.currentCheckOutVal = x.checkout;
+      });
+    }
 
     onSubmit({value,valid}:{value:Roomsearch,valid:boolean}){
       this.getAll().subscribe(
@@ -72,6 +76,10 @@ export class AppComponent implements OnInit{
       this.httpClient.post(this.postUrl, body, options)
         .subscribe(res => console.log(res));
     }
+    getWelcomeMsgs(): Observable<any> {
+      return this.httpClient.get(this.baseURL +  "/api/translation", {responseType: 'json'});
+    }
+
 
   /*mapRoom(response:HttpResponse<any>): Room[]{
     return response.body;

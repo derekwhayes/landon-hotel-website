@@ -18,7 +18,7 @@ public class TimeZoneConvertor {
         ZoneId zUTC = ZoneId.of("UTC");
         ZoneId zoneId = ZoneId.systemDefault();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a zzz");
 
 
         LocalDateTime localDateTime = LocalDateTime.now();
@@ -26,18 +26,18 @@ public class TimeZoneConvertor {
         ZonedDateTime zonedDateTime = localDateTime.atZone(zoneId);
 
         ZonedDateTime zonedDateTimeEastern = zonedDateTime.withZoneSameInstant(zEastern);
-        LocalDateTime localDateTimeEastern = zonedDateTimeEastern.toLocalDateTime();
-        String formattedTimeEastern = localDateTimeEastern.format(formatter);
+        //LocalDateTime localDateTimeEastern = zonedDateTimeEastern.toLocalDateTime();
+        String formattedTimeEastern = zonedDateTimeEastern.format(formatter);
         times.add(formattedTimeEastern);
 
         ZonedDateTime zonedDateTimeMountain = zonedDateTime.withZoneSameInstant(zMountain);
-        LocalDateTime localDateTimeMountain = zonedDateTimeMountain.toLocalDateTime();
-        String formattedTimeMountain = localDateTimeMountain.format(formatter);
+        //LocalDateTime localDateTimeMountain = zonedDateTimeMountain.toLocalDateTime();
+        String formattedTimeMountain = zonedDateTimeMountain.format(formatter);
         times.add(formattedTimeMountain);
 
         ZonedDateTime zonedDateTimeUTC = zonedDateTime.withZoneSameInstant(zUTC);
-        LocalDateTime localDateTimeUTC = zonedDateTimeUTC.toLocalDateTime();
-        String formattedTimeUTC = localDateTimeUTC.format(formatter);
+        //LocalDateTime localDateTimeUTC = zonedDateTimeUTC.toLocalDateTime();
+        String formattedTimeUTC = zonedDateTimeUTC.format(formatter);
         times.add(formattedTimeUTC);
 
         return times;

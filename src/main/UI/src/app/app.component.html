@@ -5,6 +5,9 @@
     <div class="hgroup">
       <h1>Landon Hotel</h1>
       <h2>London, Ontario</h2>
+      <h3 *ngFor="let msg of welcomeMsgs" class="fullheight" style="color: white; background: gray">
+        {{msg}}
+      </h3>
       <p><a href="/#welcome"><img src="assets/images/arrow.png" alt="down arrow"></a></p>
     </div>
   </article>
